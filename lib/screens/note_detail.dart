@@ -1,11 +1,13 @@
-// ignore_for_file: no_logic_in_create_state, prefer_final_fields, prefer_const_constructors, unused_local_variable, prefer_const_literals_to_create_immutables
+// ignore_for_file: no_logic_in_create_state, prefer_final_fields, prefer_const_constructors, unused_local_variable, prefer_const_literals_to_create_immutables, dead_code, use_key_in_widget_constructors, must_be_immutable
 
 import "package:flutter/material.dart";
 
 class NoteDetail extends StatefulWidget {
+  String? appBarTitle;
+
   @override
   State<StatefulWidget> createState() {
-    return NoteDetailState();
+    return NoteDetailState(appBarTitle ?? "Edit Note");
     throw UnimplementedError();
   }
 }
@@ -13,15 +15,21 @@ class NoteDetail extends StatefulWidget {
 class NoteDetailState extends State<NoteDetail> {
   // ignore: unused_field
   var _priority = ["High", "Low"];
+  String? appBarTitle;
+
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+
+  NoteDetailState(String appBarTitle);
+
+  // NoteDetailState(String appBarTitle);
 
   @override
   Widget build(BuildContext context) {
     TextStyle? textStyle = Theme.of(context).textTheme.titleMedium;
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Edit Notes"),
+          title: Text(appBarTitle ?? "Add Note"),
         ),
         body: Padding(
           padding: EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
@@ -84,8 +92,7 @@ class NoteDetailState extends State<NoteDetail> {
                     Expanded(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            foregroundColor:
-                                Colors.white),
+                            foregroundColor: Colors.white),
                         child: Text(
                           "Save",
                           textScaleFactor: 1.2,
@@ -97,12 +104,13 @@ class NoteDetailState extends State<NoteDetail> {
                         },
                       ),
                     ),
-                    Container(width: 5.0,),
+                    Container(
+                      width: 5.0,
+                    ),
                     Expanded(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            foregroundColor:
-                                Colors.white),
+                            foregroundColor: Colors.white),
                         child: Text(
                           "Delete",
                           textScaleFactor: 1.2,

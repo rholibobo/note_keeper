@@ -1,6 +1,7 @@
 // ignore_for_file: no_logic_in_create_state, dead_code, prefer_const_constructors, unused_local_variable
 
 import "package:flutter/material.dart";
+import "package:note_keeper_app/screens/note_detail.dart";
 
 class NoteList extends StatefulWidget {
   const NoteList({super.key});
@@ -24,6 +25,7 @@ class NoteListState extends State<NoteList> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           debugPrint("FAB CLIKCED");
+          navigateToDetail("Add Note");
         },
         tooltip: "Add Note",
         child: Icon(Icons.add),
@@ -57,10 +59,17 @@ class NoteListState extends State<NoteList> {
             ),
             onTap: () {
               debugPrint("List Tile tapped");
+              navigateToDetail("Edit Note");
             },
           ),
         );
       },
     );
+  }
+
+  void navigateToDetail(String title) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return NoteDetail();
+    }));
   }
 }

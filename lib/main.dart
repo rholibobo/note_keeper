@@ -1,4 +1,4 @@
-// ignore_for_file: dead_code
+// ignore_for_file: dead_code, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:note_keeper_app/screens/note_detail.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: "NoteKeeper",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.deepPurple),
-      home: NoteDetail(),
+      home: NoteList(),
     );
     throw UnimplementedError();
   }
