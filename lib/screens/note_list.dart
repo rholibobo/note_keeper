@@ -3,6 +3,8 @@
 import "package:flutter/material.dart";
 
 class NoteList extends StatefulWidget {
+  const NoteList({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return NoteListState();
@@ -19,6 +21,13 @@ class NoteListState extends State<NoteList> {
         title: Text("Notes"),
       ),
       body: getListView(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          debugPrint("FAB CLIKCED");
+        },
+        tooltip: "Add Note",
+        child: Icon(Icons.add),
+      ),
     );
     throw UnimplementedError();
   }
@@ -36,10 +45,19 @@ class NoteListState extends State<NoteList> {
             leading: CircleAvatar(
               backgroundColor: Colors.yellow,
               child: Icon(Icons.keyboard_arrow_right),
-
             ),
-            title: Text("Dummy Title", style: titleStyle,),
+            title: Text(
+              "Dummy Title",
+              style: titleStyle,
+            ),
             subtitle: Text("Dummy Date"),
+            trailing: Icon(
+              Icons.delete,
+              color: Colors.grey,
+            ),
+            onTap: () {
+              debugPrint("List Tile tapped");
+            },
           ),
         );
       },
