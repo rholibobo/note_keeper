@@ -1,13 +1,15 @@
-// ignore_for_file: no_logic_in_create_state, prefer_final_fields, prefer_const_constructors, unused_local_variable, prefer_const_literals_to_create_immutables, dead_code, use_key_in_widget_constructors, must_be_immutable
+// ignore_for_file: no_logic_in_create_state, prefer_final_fields, prefer_const_constructors, unused_local_variable, prefer_const_literals_to_create_immutables, dead_code, use_key_in_widget_constructors, must_be_immutable, unnecessary_this
 
 import "package:flutter/material.dart";
 
 class NoteDetail extends StatefulWidget {
   String? appBarTitle;
 
+  NoteDetail(String title);
+
   @override
   State<StatefulWidget> createState() {
-    return NoteDetailState(appBarTitle ?? "Edit Note");
+    return NoteDetailState(this.appBarTitle);
     throw UnimplementedError();
   }
 }
@@ -20,7 +22,7 @@ class NoteDetailState extends State<NoteDetail> {
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
-  NoteDetailState(String appBarTitle);
+  NoteDetailState(appBarTitle);
 
   // NoteDetailState(String appBarTitle);
 
