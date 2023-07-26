@@ -1,4 +1,4 @@
-// ignore_for_file: dead_code, prefer_const_constructors
+// ignore_for_file: dead_code, prefer_const_constructors, unused_import
 
 import 'package:flutter/material.dart';
 import 'package:note_keeper_app/screens/note_detail.dart';

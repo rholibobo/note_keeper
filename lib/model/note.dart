@@ -1,23 +1,29 @@
 // ignore_for_file: unused_field, unnecessary_this, prefer_collection_literals, unnecessary_null_comparison, body_might_complete_normally_nullable, unused_import, avoid_web_libraries_in_flutter
 
-import 'dart:html';
+// import 'dart:html';
 
 class Note {
-  int _id = 0;
+  // int _id;
+  // String _title;
+  // String _description;
+  // String _date;
+  // int _priority;
+  int? _id;
   String _title = '';
-  String? _description = '';
+  String _description = '';
   String _date = '';
-  int _priority = 0;
+  int? _priority;
 
-  Note(this._title, this._date, this._priority, this._id, [this._description]);
+  Note(this._title, this._date, this._priority, this._description);
 
-  Note.withId(this._id, this._title, this._date, this._priority,
-      [this._description]);
+  Note.withId(
+      this._id, this._title, this._date, this._priority, this._description);
 
-  int get id => _id;
+  int get id => _id ?? 0;
   String get title => _title;
   String get date => _date;
-  int get priority => _priority;
+  int get priority => _priority!;
+  String get description => _description;
 
   set title(String newTitle) {
     if (newTitle.length <= 255) {

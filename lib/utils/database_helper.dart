@@ -31,9 +31,11 @@ class DatabaseHelper {
     return _database!;
   }
 
+  //function to initialize db
   Future<Database> initializeDatabase() async {
     // Get the directory path for both Android and iOS to store database.
     Directory directory = await getApplicationDocumentsDirectory();
+    // path to db
     String path = directory.path + 'notes.db';
 
     // Open/create the database at a given path
@@ -42,6 +44,7 @@ class DatabaseHelper {
     return notesDatabase;
   }
 
+  // Function to create db
   void _createDb(Database db, int newVersion) async {
     await db.execute(
         "CREATE TABLE $noteTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colTitle TEXT, $colDescription TEXT, $colPriority INTEGER, $colDate TEXT)");
@@ -51,8 +54,6 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> getNoteMapList() async {
     Database db = await this.database;
 
-    // var result =
-    //     await db.rawQuery('SELECT * FROM $noteTable order by $colPriority ASC');
     var result = await db.query(noteTable, orderBy: '$colPriority ASC');
     return result;
   }
@@ -87,5 +88,19 @@ class DatabaseHelper {
         await db.rawQuery('SELECT COUNT (*) from $noteTable');
     int? result = Sqflite.firstIntValue(x);
     return result;
+  }
+
+  // Get the 'Map List' [List<Map>] and convert it to 'Note List' [List<Note>]
+  Future<List<Note>> getNoteList() async {
+    var noteMapList = await getNoteMapList(); //Get 'Map List' from database
+    int count = noteMapList.length; // Count the numbe rof map entries in db table
+
+    List<Note> noteList = <Note>[];
+    // For loop tocreate a 'Note List' from a 'Map List'
+    for (int i = 0; i < count; i++) {
+      noteList.add(Note.fromMapObject(noteMapList[i]));
+    }
+
+    return noteList;
   }
 }
